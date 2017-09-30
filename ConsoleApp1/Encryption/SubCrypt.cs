@@ -36,6 +36,8 @@ namespace ConsoleApp1
 
         private char DecryptLetter(string s, int shift)
         {
+            if (s[1] == ' ')
+                s = s[0].ToString();
             int aN = pt.GetElement(s).AtomicNumber;
             int t = (aN - shift + 30);
             return (char) new IntRange(32, 126).IterativeAdjust(t, 95);
