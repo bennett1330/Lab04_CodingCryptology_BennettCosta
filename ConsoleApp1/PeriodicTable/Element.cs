@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ConsoleApp1.PeriodicTable
+﻿namespace ConsoleApp1.PeriodicTable
 {
     public class Element
     {

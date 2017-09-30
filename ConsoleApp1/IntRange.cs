@@ -22,9 +22,9 @@ namespace ConsoleApp1
             if (!under && !over)
                 return value;
             else if (under)
-                return IterativeAdjust(value - adjustment, adjustment);
-            else if (over)
                 return IterativeAdjust(value + adjustment, adjustment);
+            else if (over)
+                return IterativeAdjust(value - adjustment, adjustment);
             else
                 throw new System.Exception("ERROR: Congrats, you broke math!");
         }

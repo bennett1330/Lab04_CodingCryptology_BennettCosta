@@ -6,7 +6,9 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            PeriodicTable.LookupElement.SearchLoop();
+            //PeriodicTable.LookupElement.SearchLoop();
+            Encryption e = new SubCrypt();
+            while (true) { e.EncryptPrompt(); }
         }
     }
 }
