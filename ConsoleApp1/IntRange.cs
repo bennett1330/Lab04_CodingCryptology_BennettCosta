@@ -8,7 +8,7 @@ namespace ConsoleApp1
     {
         static public int Min, Max;
 
-        Range( int min, int max)
+        public IntRange(int min, int max)
         {
             Min = min;
             Max = max;

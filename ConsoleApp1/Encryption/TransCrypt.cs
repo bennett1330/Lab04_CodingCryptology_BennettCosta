@@ -7,12 +7,12 @@ namespace ConsoleApp1
     class TransCrypt : Encryption
     {
 
-        protected override string Encrypt(string plaintext)
+        protected override string Encrypt(string plaintext, int key)
         {
             throw new NotImplementedException();
         }
 
-        protected override string Decrypt(string ciphertext)
+        protected override string Decrypt(string ciphertext, int key)
         {
             throw new NotImplementedException();
         }
