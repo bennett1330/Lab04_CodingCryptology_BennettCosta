@@ -47,32 +47,21 @@ namespace ConsoleApp1
         /// <summary>
         /// Used to test the various encryptions in the console in one standard format.
         /// </summary>
-        public void EncryptPrompt()
+        public void EncryptPrompt(bool isPlainIn)
         {
-            Console.Write("Select option: [1: encrypt; 2: decrypt] ");
-            string selection = Console.ReadLine();
-
             Console.Write("Type Key: ");
             string keyStr = Console.ReadLine();
             int key = Convert.ToInt32(keyStr);
 
-            Console.Write("Type message text: ");
+            Console.Write("Type {0}text: ", isPlainIn ? "plain" : "cipher");
             string msg = Console.ReadLine();
-             
+
             // TODO : should probably add some sort of input checking but mehhhhhh
 
-            switch (selection)
-            {
-                case "1":
-                    Console.WriteLine("Ciphertext: {0}", Encrypt(msg, key));
-                    break;
-                case "2":
-                    Console.WriteLine("Plaintext: {0}", Decrypt(msg, key));
-                    break;
-                default:
-                    Console.WriteLine("ERROR: Invalid selection.");
-                    break;
-            }
+            Console.WriteLine("{0}text: {1}", isPlainIn ? "Cipher" : "Plain", 
+                                              isPlainIn ? Encrypt(msg,key) : Decrypt(msg, key)
+            );
+
         }
     }
 }
