@@ -1,44 +1,9 @@
 ﻿using System;
-using System.Globalization;
 
 namespace ConsoleApp1
 {
     class SubCrypt : Encryption
     {
-
-        PeriodicTable.PeriodicTable pt = new PeriodicTable.PeriodicTable();
-
-        /// <summary>
-        /// Every 2 digits of the 8 digit key are used as the atomic number of a periodic 
-        /// element to look up and store the integer value corresponding to the atomic 
-        /// weight.
-        /// </summary>
-        /// <param name="key">8 digit integer key</param>
-        /// <returns>4 element integer array of integer atomic weights</returns>
-        private int[] GetShifts(int key)
-        {
-            string strKey = key.ToString();
-            int[] wKey = new int[strKey.Length / 2];
-            for (double i = 0; i + 1 < strKey.Length; i = i + 2)
-            {
-                int aN = Convert.ToInt32(String.Concat(strKey[(int)i], strKey[(int)i + 1]));
-                wKey[(int)Math.Floor(i / 2)] = (int) Math.Floor(pt.GetElement(aN).AtomicWeight);
-            }
-            return wKey;
-        }
-
-        /// <summary>
-        /// Splits the ciphertext into 4 chemical elements that it represents.
-        /// </summary>
-        /// <param name="ciphertext">text to be decrypted</param>
-        /// <returns>string array of 2 character element symbol strings</returns>
-        private string[] GetSplitText(string ciphertext)
-        {
-            string[] str = new string[ciphertext.Length / 2];
-            for (double i = 0; i + 1 < ciphertext.Length; i = i + 2)
-                str[(int)Math.Floor(i / 2)] = String.Concat(ciphertext[(int)i], ciphertext[(int)i + 1]);
-            return str;
-        }
 
         /// <summary>
         /// Encrypts one letter using an atomic number that corresponds to an adjusted ascii value and

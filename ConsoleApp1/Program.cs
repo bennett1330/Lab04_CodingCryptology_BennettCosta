@@ -13,9 +13,4 @@ namespace ConsoleApp1
     }
 }
 
-// Transposition::
-// correspond each ascii letter in plain text - 31 to element
-// each digit of key gives column of plaintext of same index
-// 
-
 
