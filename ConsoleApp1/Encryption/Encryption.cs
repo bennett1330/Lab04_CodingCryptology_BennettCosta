@@ -18,7 +18,7 @@ namespace ConsoleApp1
         protected int[] GetShifts(int key)
         {
             string strKey = key.ToString();
-            int[] wKey = new int[strKey.Length / 2];
+            int[] wKey = new int[(int)Math.Ceiling((double)strKey.Length / 2)];
             for (double i = 0; i + 1 < strKey.Length; i = i + 2)
             {
                 int aN = Convert.ToInt32(String.Concat(strKey[(int)i], strKey[(int)i + 1]));
@@ -43,6 +43,21 @@ namespace ConsoleApp1
         protected abstract string Encrypt(string plaintext, int key);
         protected abstract string Decrypt(string ciphertext, int key);
 
+        protected string EncryptLoop(string msg, int key, int loopCount)
+        {
+            if (loopCount == 1)
+                return Encrypt(msg, key);
+            else
+                return EncryptLoop(Encrypt(msg, key), key, loopCount - 1);
+        }
+
+        protected string DecryptLoop(string msg, int key, int loopCount)
+        {
+            if (loopCount == 1)
+                return Decrypt(msg, key);
+            else
+                return DecryptLoop(Decrypt(msg, key), key, loopCount - 1);
+        }
 
         /// <summary>
         /// Used to test the various encryptions in the console in one standard format.
@@ -51,17 +66,17 @@ namespace ConsoleApp1
         {
             Console.Write("Type Key: ");
             string keyStr = Console.ReadLine();
+            int loopCount = keyStr[7] - 46;
             int key = Convert.ToInt32(keyStr);
-
-            Console.Write("Type {0}text: ", isPlainIn ? "plain" : "cipher");
-            string msg = Console.ReadLine();
-
-            // TODO : should probably add some sort of input checking but mehhhhhh
-
-            Console.WriteLine("{0}text: {1}", isPlainIn ? "Cipher" : "Plain", 
-                                              isPlainIn ? Encrypt(msg,key) : Decrypt(msg, key)
+            Console.Write("Type {0}text: ", isPlainIn ? "plain" : 
+                                                        "cipher"
             );
-
+            string msg = Console.ReadLine();
+            Console.WriteLine("{0}text: {1}", isPlainIn ? "Cipher" : 
+                                                          "Plain", 
+                                              isPlainIn ? EncryptLoop(msg, key, loopCount) : 
+                                                          DecryptLoop(msg, key, loopCount)
+            );
         }
     }
 }

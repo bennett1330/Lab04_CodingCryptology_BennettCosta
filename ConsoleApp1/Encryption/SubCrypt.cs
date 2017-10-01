@@ -28,7 +28,9 @@ namespace ConsoleApp1
         /// <returns></returns>
         private char DecryptLetter(string s, int shift)
         {
-            if (s[1] == ' ')
+            if (s.Length == 1)
+                s = s[0].ToString().ToUpper(); // handling for end letter decryption case where space lefted off
+            else if (s[1] == ' ')
                 s = s[0].ToString().ToUpper(); // handling for single letter elements
             else
                 s = s[0].ToString().ToUpper() + s[1];
@@ -42,7 +44,7 @@ namespace ConsoleApp1
             int[] shifts = GetShifts(key);
             string ciphertext = "";
             for (double i = 0; i < plaintext.Length; i++)
-                ciphertext = ciphertext + EncryptLetter(plaintext[(int)i], shifts[(int)Math.Floor(i / 2)]);
+                ciphertext = ciphertext + EncryptLetter(plaintext[(int)i], shifts[(int) i % shifts.Length]);
             return ciphertext.ToLower();
         }
 
@@ -52,7 +54,7 @@ namespace ConsoleApp1
             string[] splittext = GetSplitText(ciphertext);
             string plaintext = "";
             for (double i = 0; i < splittext.Length; i++)
-                plaintext = plaintext + DecryptLetter(splittext[(int)i], shifts[(int)Math.Floor(i / 2)]);
+                plaintext = plaintext + DecryptLetter(splittext[(int)i], shifts[(int)i % shifts.Length]);
             return plaintext;
         }
 

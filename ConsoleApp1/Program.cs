@@ -4,6 +4,8 @@ namespace ConsoleApp1
 {
     class Program
     {
+
+        // TODO : should probably add some sort of input checking but mehhhhhh
         static void Main(string[] args)
         {
             Console.WriteLine("Lab04 - Coding Cryptology");
