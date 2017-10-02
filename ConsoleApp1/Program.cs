@@ -11,67 +11,76 @@ namespace ConsoleApp1
             Console.WriteLine("Lab04 - Coding Cryptology");
             Console.WriteLine("-------------------------");
             bool run = true;
-            while (run) {
-                PrintOptions();
+            while (run)
+            {
+                Console.WriteLine(
+                    "[1: Substitution Algorithm " +
+                    "2: Transposition Algorithm " +
+                    "3: Both Algorithms " +
+                    "0: exit]"
+                );
                 Console.WriteLine();
                 string options = Console.ReadLine();
-                switch (options)
+                bool innerLoop = true;
+                while (innerLoop)
                 {
-                    case "1":
-                        EncryptDecryptPrompt(new SubCrypt());
-                        break;
-                    case "2":
-                        EncryptDecryptPrompt(new KenTransCrypt());
-                        break;
-                    case "3":
-                        throw new NotImplementedException();
-                        break;
-                    case "0":
-                        Console.Write("Exiting console application...");
-                        run = false;
-                        break;
-                    default:
-                        Console.WriteLine("ERROR: Invalid option.");
-                        continue;
+                    string[] r;
+                    Encryption en;
+                    switch (options)
+                    {
+                        case "1":
+                            r = Prompt();
+                            if (r == null) { innerLoop = false; continue; }
+                            en = new SubCrypt();
+                            en.EncryptResponse(Convert.ToBoolean(r[0]), r[1], r[2]);
+                            break;
+                        case "2":
+                            r = Prompt();
+                            if (r == null) { innerLoop = false; continue; }
+                            en = new KenTransCrypt();
+                            en.EncryptResponse(Convert.ToBoolean(r[0]), r[1], r[2]);
+                            break;
+                        case "3":
+                            r = Prompt();
+                            if (r == null) { innerLoop = false; continue; }
+                            en = new SubCrypt();
+                            string res = en.EncryptSilent(Convert.ToBoolean(r[0]), r[1], r[2]);
+                            Encryption en2 = new KenTransCrypt();
+                            en2.EncryptResponse(Convert.ToBoolean(r[0]), res, r[2]);
+                            break;
+                        case "0":
+                            Console.Write("Exiting console application...");
+                            innerLoop = false;
+                            run = false;
+                            continue;
+                        default:
+                            Console.WriteLine("ERROR: Invalid option.");
+                            innerLoop = false;
+                            continue;
+                    }
                 }
             }
             Console.WriteLine("Goodbye.");
         }
 
-        static void EncryptDecryptPrompt(Encryption en)
+        public static string[] Prompt()
         {
-            bool runInner = true;
-            while (runInner)
+            Console.Write("[E: encrypt D: decrypt C: Back]... ");
+            string s = Console.ReadLine().ToUpper();
+            switch (s)
             {
-                Console.Write("[E: encrypt D: decrypt C: Back]... ");
-                string s = Console.ReadLine().ToUpper();
-                switch (s)
-                {
-                    case "E":
-                        en.EncryptPrompt(true);
-                        break;
-                    case "D":
-                        en.EncryptPrompt(false);
-                        break;
-                    case "C":
-                        runInner = false;
-                        break;
-                    default:
-                        Console.WriteLine("ERROR: Invalid option.");
-                        continue;
-                }
+                case "E":
+                    return Encryption.EncryptPrompt(true);
+                case "D":
+                    return Encryption.EncryptPrompt(false);
+                case "C":
+                    return null;
+                default:
+                    Console.WriteLine("ERROR: Invalid option.");
+                    return null;
             }
         }
 
-        static void PrintOptions()
-        {
-            Console.WriteLine(
-                "[1: Substitution Algorithm " +
-                "2: Transposition Algorithm " +
-                "3: Both Algorithms " +
-                "0: exit]"
-            );
-        }
     }
 }
 

@@ -62,21 +62,30 @@ namespace ConsoleApp1
         /// <summary>
         /// Used to test the various encryptions in the console in one standard format.
         /// </summary>
-        public void EncryptPrompt(bool isPlainIn)
+        public static string[] EncryptPrompt(bool isPlainIn)
         {
             Console.Write("Type Key: ");
-            string keyStr = Console.ReadLine();
-            int loopCount = keyStr[7] - 46;
-            int key = Convert.ToInt32(keyStr);
+            string keyStr = Console.ReadLine();           
             Console.Write("Type {0}text: ", isPlainIn ? "plain" : 
                                                         "cipher"
             );
             string msg = Console.ReadLine();
-            Console.WriteLine("{0}text: {1}", isPlainIn ? "Cipher" : 
-                                                          "Plain", 
-                                              isPlainIn ? EncryptLoop(msg, key, loopCount) : 
-                                                          DecryptLoop(msg, key, loopCount)
-            );
+            return new string[]{ (!isPlainIn).ToString(), msg, keyStr };
+        }
+
+        public string EncryptResponse(bool isPlainOut, string msg, string keyStr)
+        {
+            string res = EncryptSilent(isPlainOut, msg, keyStr);
+            Console.WriteLine("{0}text: {1}", isPlainOut ? "Plain" : "Cipher", res);
+            return res;
+        }
+
+        public string EncryptSilent(bool isPlainOut, string msg, string keyStr)
+        {
+            int loopCount = keyStr[7] - 46;
+            int key = Convert.ToInt32(keyStr);
+            return isPlainOut ? DecryptLoop(msg, key, loopCount) :
+                                      EncryptLoop(msg, key, loopCount);
         }
     }
 }

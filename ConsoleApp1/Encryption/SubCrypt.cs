@@ -50,6 +50,8 @@ namespace ConsoleApp1
 
         protected override string Decrypt(string ciphertext, int key)
         {
+            if (ciphertext.Length % 2 != 0)
+                ciphertext = ciphertext.Insert(ciphertext.Length, " ");
             int[] shifts = GetShifts(key);
             string[] splittext = GetSplitText(ciphertext);
             string plaintext = "";
