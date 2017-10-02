@@ -44,9 +44,18 @@ namespace ConsoleApp1
                             r = Prompt();
                             if (r == null) { innerLoop = false; continue; }
                             en = new SubCrypt();
-                            string res = en.EncryptSilent(Convert.ToBoolean(r[0]), r[1], r[2]);
-                            Encryption en2 = new KenTransCrypt();
-                            en2.EncryptResponse(Convert.ToBoolean(r[0]), res, r[2]);
+                            if (Convert.ToBoolean(r[0]) == true)
+                            {
+                                string res = en.EncryptSilent(Convert.ToBoolean(r[0]), r[1], r[2]);
+                                Encryption en2 = new KenTransCrypt();
+                                en2.EncryptResponse(Convert.ToBoolean(r[0]), res, r[2]);
+                            }
+                            else
+                            {
+                                Encryption en2 = new KenTransCrypt();
+                                string res = en2.EncryptSilent(Convert.ToBoolean(r[0]), r[1], r[2]);
+                                en.EncryptResponse(Convert.ToBoolean(r[0]), res, r[2]);
+                            }
                             break;
                         case "0":
                             Console.Write("Exiting console application...");

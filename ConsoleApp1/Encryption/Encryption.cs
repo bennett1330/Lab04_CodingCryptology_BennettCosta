@@ -85,7 +85,7 @@ namespace ConsoleApp1
             int loopCount = keyStr[7] - 46;
             int key = Convert.ToInt32(keyStr);
             return isPlainOut ? DecryptLoop(msg, key, loopCount) :
-                                      EncryptLoop(msg, key, loopCount);
+                                EncryptLoop(msg, key, loopCount);
         }
     }
 }
