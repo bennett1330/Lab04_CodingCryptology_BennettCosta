@@ -1,11 +1,13 @@
 ﻿using System;
 
+
+// Basic cryptology that utilizes the periodic table of elements for substitution and/or transposition encryption and decryption
 namespace ConsoleApp1
 {
     class Program
     {
 
-        // TODO : should probably add some sort of input checking but mehhhhhh
+        // TODO : Should add input checking
         static void Main(string[] args)
         {
             Console.WriteLine("Lab04 - Coding Cryptology");
